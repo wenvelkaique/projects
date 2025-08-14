@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+
 """
 Ferramentas Python - UI estilo "cards" sem imagens externas
 Recursos:
@@ -12,14 +12,13 @@ import tkinter as tk
 from tkinter import ttk, messagebox, simpledialog, filedialog
 import csv, os, shutil, random, string
 
-# ----- (opcional) matplotlib para o gráfico -----
 try:
     import matplotlib.pyplot as plt
     HAS_MPL = True
 except Exception:
     HAS_MPL = False
 
-# ===================== TEMA / ESTILO =====================
+
 BG      = "#f3f2fa"   # fundo geral
 CARD    = "#ffffff"   # cartão
 ACCENT  = "#7a5cff"   # roxo principal
@@ -36,7 +35,7 @@ FONT_SM = ("Segoe UI", 10)
 
 def style_ttk(root):
     style = ttk.Style(root)
-    # tema padrão "clam" para permitir cores customizadas
+  
     style.theme_use("clam")
 
     style.configure("TLabel", background=CARD, foreground=TXT, font=FONT_TX)
@@ -64,7 +63,7 @@ def style_ttk(root):
 
     style.configure("TCombobox", fieldbackground="#fbfbfd", background="#fbfbfd")
 
-# ---------------- Componentes de UI ----------------
+
 class Card(ttk.Frame):
     """Cartão com borda arredondada simulada usando Canvas"""
     def __init__(self, master, title, subtitle=None, width=360, height=360, *args, **kwargs):
@@ -82,7 +81,7 @@ class Card(ttk.Frame):
         self.inner = ttk.Frame(self, padding=(18, 60, 18, 18), style="CardBody.TFrame")
         self.inner.place(x=0, y=0, relwidth=1, relheight=1)
 
-# ================ DESPESAS (CSV) ==================
+
 DESPESAS_FILE = "despesas.csv"
 despesas = []
 
@@ -159,7 +158,7 @@ def mostrar_grafico_despesas():
     plt.tight_layout()
     plt.show()
 
-# =============== GERADOR DE SENHAS =================
+
 def gerar_senha(tam_entry, out_entry):
     try:
         n = int(tam_entry.get())
@@ -175,7 +174,7 @@ def gerar_senha(tam_entry, out_entry):
     out_entry.insert(0, senha)
     out_entry.config(state="readonly")
 
-# =============== CONVERSOR =========================
+
 def converter(valor_entry, combo, label_out):
     try:
         v = float(valor_entry.get())
@@ -197,7 +196,7 @@ def converter(valor_entry, combo, label_out):
         txt = f"{v:.2f} mi = {r:.2f} km"
     label_out.config(text=txt)
 
-# =============== ORGANIZADOR DE ARQUIVOS ===========
+
 EXTENSOES = {
     "Imagens": [".jpg", ".jpeg", ".png", ".gif", ".webp"],
     "Documentos": [".pdf", ".docx", ".doc", ".txt", ".xlsx", ".pptx"],
@@ -231,7 +230,7 @@ def organizar_pasta():
             print("Erro movendo", arq, e)
     messagebox.showinfo("Organizador", f"Arquivos organizados! Itens movidos: {movidos}")
 
-# ================== APP ============================
+
 root = tk.Tk()
 root.title("Ferramentas Python")
 root.geometry("1120x640")
@@ -245,14 +244,14 @@ top.pack(fill="x")
 lbl = ttk.Label(top, text="Ferramentas Python", style="H1.TLabel")
 lbl.pack(side="left")
 
-# Grid principal (2 linhas x 2 colunas de cards)
+
 grid = ttk.Frame(root, padding=18)
 grid.pack(fill="both", expand=True)
 
 grid.columnconfigure((0,1), weight=1, uniform="col")
 grid.rowconfigure((0,1), weight=1, uniform="row")
 
-# ---- Card Despesas
+
 card1 = Card(grid, "Despesas", "Registre e visualize seus gastos")
 card1.grid(row=0, column=0, sticky="nsew", padx=10, pady=10)
 
@@ -271,7 +270,7 @@ lista_desp.pack(fill="both", expand=True)
 carregar_despesas()
 atualizar_lista_despesas(lista_desp)
 
-# ---- Card Senhas
+
 card2 = Card(grid, "Senhas", "Gere senhas fortes rapidamente")
 card2.grid(row=0, column=1, sticky="nsew", padx=10, pady=10)
 
@@ -290,7 +289,7 @@ ent_out.pack(fill="x")
 ttk.Label(card2.inner, text="Dica: use 16+ caracteres, com letras, números e símbolos.",
           style="Muted.TLabel").pack(anchor="w", pady=(8,0))
 
-# ---- Card Conversor
+
 card3 = Card(grid, "Conversor", "Temperatura e distância")
 card3.grid(row=1, column=0, sticky="nsew", padx=10, pady=10)
 
@@ -312,7 +311,7 @@ lbl_res.pack(anchor="w", pady=(6,10))
 ttk.Button(card3.inner, text="Converter",
            command=lambda: converter(ent_val, combo, lbl_res)).pack(anchor="w")
 
-# ---- Card Organizador
+
 card4 = Card(grid, "Organizador", "Separe arquivos por tipo em pastas")
 card4.grid(row=1, column=1, sticky="nsew", padx=10, pady=10)
 
@@ -321,10 +320,11 @@ ttk.Label(card4.inner, text="Escolha uma pasta e eu organizo por categoria.",
 ttk.Button(card4.inner, text="Selecionar Pasta e Organizar", style="Alt.TButton",
            command=organizar_pasta).pack(anchor="w")
 
-# Rodapé
+
 footer = ttk.Frame(root, padding=(18, 0, 18, 14))
 footer.pack(fill="x")
 ttk.Label(footer, text="Feito com Tkinter • sem imagens externas • tema inspirado em cards",
           style="Muted.TLabel", background=BG).pack(side="left")
 
 root.mainloop()
+
