@@ -1,7 +1,7 @@
 # Ferramentas Python
 
-Projeto com **4 ferramentas úteis em Python**, ideal para portfólio no GitHub.  
-Todas possuem **interface gráfica** unificada, mas também existem scripts individuais.
+Projeto com **4 ferramentas úteis em Python**.
+
 
 ---
 
