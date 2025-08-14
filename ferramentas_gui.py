@@ -1,6 +1,6 @@
 
 """
-Ferramentas Python - UI estilo "cards" sem imagens externas
+Ferramentas Python 
 Recursos:
  - Despesas (CSV) + gráfico por categoria
  - Gerador de Senhas
@@ -327,4 +327,5 @@ ttk.Label(footer, text="Feito com Tkinter • sem imagens externas • tema insp
           style="Muted.TLabel", background=BG).pack(side="left")
 
 root.mainloop()
+
 
